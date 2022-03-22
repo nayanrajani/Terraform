@@ -1,0 +1,5 @@
+
+    accessKey:'AKIA43UXXWMCDOOF3U5N',
+    secretAccessKey:'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',
+    region:'ap-southeast-1',
+    endpoint:'https://dynamodb.ap-southeast-1.amazonaws.com'
