@@ -1,0 +1,156 @@
+- link to Install Terraform in windows
+	- https://www.decodingdevops.com/how-to-install-terraform-on-windows-10-or-8-or-7-decodingdevops/
+	- currently working for cloudflare.
+- Create a folder to start with that
+	- open cmd , and go to that folder directory
+	- create a new file in this folder, with the [name].tf
+	- open it with any text editor
+	- add this code there
+		terraform {
+			required_providers {
+				cloudflare = {
+					source = "cloudflare/cloudflare"
+					version = "~> 3.0"
+				}
+			}
+		}
+
+	- Terraform understand only .tf files, to read the resources.
+	- save this file
+	- cmd -> terraform init (to get initialize to check if there is any .tf file, if yes then execute the init)
+
+- we are going to sync the resources from cloudflare to terraform state file.
+	- go to cloudflare and take your domain, overview -> scroll down -> and then copy the zone id
+	- make a file named as "variables.tf"
+	- add the code there
+		variable "zone_id" {
+			description = "Please enter Zone ID"
+			type = string
+			sensitive = true
+			default = "<Zone ID>"
+		}
+	- go to DNS -> check the entries, and we are going to create a new entry in 
+	- go to registry for documentation related to cloudflare
+		- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record
+	- then copy the resource block and paste in the main.tf
+	- add the code
+		// DNS Entry
+		//terraform destroy -target cloudflare_record.DNS_entry
+		resource "cloudflare_record" "DNS_entry" {
+  			zone_id = var.zone_id
+  			name    = "yup"
+  			value   = "35.234.81.115"
+  			type    = "A"
+			ttl     = "300"
+  			proxied = true //chanage to true 
+		}
+	- go to cmd -> terraform plan (give a execution plan)
+	- error (we need token)
+		- for this follow
+			- go to cloudflare -> my profile ->  API token ->  create a custom token for your own domain + permission for DNS
+			- Copy the token 
+	- the go to variable.tf file and add the code
+		variable "DNS" {
+			description = "Please enter DNS Token"
+			type = string
+			sensitive = true
+			default = "<DNS Token>"
+		}
+
+		variable "Email" {
+			description = "Please enter DNS Token"
+			type = string
+			sensitive = true
+			default = "<E-mail>"
+		}
+
+	- then add this below code in main.tf
+		provider "cloudflare" {
+			alias = "dns_record"
+			email = var.email
+			api_token = var.DNS
+		}
+	- Change this below code in main.tf
+		resource "cloudflare_record" "DNS_entry" {
+  			zone_id = var.zone_id
+			provider = cloudflare.dns_record
+  			name    = "yup"
+  			value   = "35.234.81.115"
+  			type    = "A"
+  			proxied = true //chanage to true 
+		}
+	- then go to cmd -> terraform plan
+	- terraform apply
+	- go and check for the DNS entry you created with terraform.
+		- even you can roll the token if you think your token is open/shared with anyone by mistake with same method but check for roll method.
+		- you can check as well via cmd.
+
+- Actual works start from here, to get the existing resource from cloudflare with CF-Terraforming.
+- Traditional way to add existing resource for only 1 resource
+	#Import cloudflare_record
+
+	#Step 1 : Get Resourse ID
+		curl -X GET \
+		-H "X-Auth-Email: <Email>" \
+		-H "X-Auth-Key: <Token>" \
+		"https://api.cloudflare.com/client/v4/zones/<Zone id>/dns_records"
+	- copy the result
+	- go to json beauty and paste it
+
+	- example id 
+		- fd297a4d2c2052550e6c6c84fcc72765
+
+
+	#Step 2 : Create Resource with Default Values
+		resource "cloudflare_record" "test" {
+			zone_id = var.cloudflare_zone_id
+			name = "terraform"
+			type = "A"
+		}
+
+
+	#Step 3 :
+		- terraform import cloudflare_record.test <Zone id>/<Resource id> (ZoneID/AbvResID)
+
+
+
+	#Step 4 : terraform show
+
+
+
+	#Step 5 : Copy terraform show to resource file & remove unwanted parameters
+	ref. https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record
+
+- Better way with CF-Terraforming
+	
+	#STEPS AFTER CF-TERRAFORMING
+
+	#Step 1: Add Provider block and Access token in main.tf
+
+	- prerequisite
+		- Download zip github/CF-TERRAFORMING from google or git clone it
+		- extract it, go to google and install go language (latest)
+		- and follow the steps to install it.
+		- set the env. variable
+		- go to folder of cf-terraforming, and type in the folder bar -> clear -> cmd
+
+	Step 2: Execute the below command to get all resources of 1 resource-type and add the same to our tf file.
+
+	go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 55b9a650aeea280d792c1e751989cd57 --resource-type "cloudflare_record"
+	
+		- check resources available
+			- https://github.com/cloudflare/cf-terraforming
+
+	Step 3:
+	Add Provider parameter in all resources manually from Step 1.
+	Also change the static zone id to variable with sensitivity as true.
+
+
+
+	Step 4: Execute the below command to get import statement of resource-type.
+	go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 55b9a650aeea280d792c1e751989cd57 --resource-type "cloudflare_record"
+
+		- Copy the commands generated by cmd and paste somewhere to store, add-> (commands) &
+		
+
+	Step 5: Execute all import statement 1 by 1 to update tfstate file.

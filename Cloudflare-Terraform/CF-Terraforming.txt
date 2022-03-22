@@ -1,0 +1,150 @@
+1. First of all create a folder and download the CF-terraforming from github and extract it.
+    - check resources available
+			- https://github.com/cloudflare/cf-terraforming
+
+2. then download go language from google, and install it with path variable.
+
+3. then download terraform latest version, 
+    - check for go language 
+        - go version
+    - check for terraform
+        - terraform -v
+
+4. create a file main.tf and variable.tf inside the folder  
+    - inside main.tf add following code inside it  
+        terraform {
+            required_providers {
+                cloudflare = {
+                source = "cloudflare/cloudflare"
+                version = "~> 3.0"
+                }
+            }
+        }
+
+    - inside variable.tf add following code inside it, add more if there are any
+        variable "zone_id" {
+        description = "Please enter Zone ID"
+        type        = string
+        sensitive = true
+        default = "<Zone id/var.zone_id>"  // zone id
+        }
+
+        variable "dns" {
+        description = "Please enter dns"
+        type        = string
+        sensitive   = true
+        default     = "<Token>"  //Common Token
+        }
+        variable "email" {
+        description = "Please enter email"
+        type        = string
+        sensitive   = true
+        default     = "<Email>"
+        }
+
+5. go to folder path in cmd, and hit 
+    - terraform init 
+        - it will initialize the terraform for cloudflare 
+    
+6. make a buffer txt file for editing and changing the Generate and import commands commands
+
+7. Execute the below command in cmd to get all resources of 1 resource-type and add the same to our tf file.
+- For more commands refer CF-terraform-Buffer
+
+    - go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record"
+
+	- go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-GenerateRecords.tf
+
+        - then add this below code into GC-GenerateRecords.tf before the resources
+            terraform {
+                required_providers {
+                    cloudflare = {
+                        source = "cloudflare/cloudflare"
+                        version = "~> 3.0"
+                    }
+                }
+            }
+
+            provider "cloudflare" {
+                //alias = "dns_record" //(optional, only if you use a single token for all resources)
+                email = var.email
+                api_token = var.dns
+            }
+    - Remove the main.tf file
+
+
+NOTE: (optional, only if you use a single token for all resources) and then add this below line for all the DNS GC-ImportRecords.txt with the help of find and replace
+    - provider = cloudflare.dns_record 
+
+8. Now run the below command in cmd for import the resources
+- For more commands refer CF-terraform-Buffer 
+    - go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-ImportRecords.txt
+        - then go to GC-ImportRecords.txt file and manage all the import commands 
+            - For Windows
+                - with CTRL + F in search bar type-> "\n" and select regular expression 
+                - and to replace type -> " 2>> err.txt 1>> out.txt & " to align
+                    - \n will find the new line
+                    - 2>> err.txt 1>> out.txt will give you the output for any error or successful execution
+		- Check with "type err.txt" in command or directly in the err.txt file
+            - example
+                - terraform import cloudflare_record.terraform_managed_resource_645f47b718d443cb9ab8c35d49cc8703 0d32a989ca0e8d5e9155163f9f937d2b/645f47b718d443cb9ab8c35d49cc8703 && terraform import cloudflare_record.terraform_managed_resource_c8de0a233a9d5f242998c2616a90dd9c 0d32a989ca0e8d5e9155163f9f937d2b/c8de0a233a9d5f242998c2616a90dd9c && terraform import cloudflare_record.terraform_managed_resource_7509d548659900a7e7da340516beb2f6 0d32a989ca0e8d5e9155163f9f937d2b/7509d548659900a7e7da340516beb2f6 && terraform import cloudflare_record.terraform_managed_resource_f8cef1528ed4983d87717ebd8dd7d50b 0d32a989ca0e8d5e9155163f9f937d2b/f8cef1528ed4983d87717ebd8dd7d50b && terraform import cloudflare_record.terraform_managed_resource_caa8b51d744d8ac1c092e6ce7d0dcbcf 0d32a989ca0e8d5e9155163f9f937d2b/caa8b51d744d8ac1c092e6ce7d0dcbcfterraform import cloudflare_page_rule.terraform_managed_resource_6bd7fa54e86758d72df12957ae463bc9 0d32a989ca0e8d5e9155163f9f937d2b/6bd7fa54e86758d72df12957ae463bc9
+        - then run above command in cmd to get all resources to be imported in a tf state file
+        - then run terraform plan, to see no change between cloudflare configs and terraform configs.
+
+9. Repeate step 7 for all the resources those are with green tick ✅
+    - Refer CF-Terraform-Buffer for this
+       - cloudflare_access_application	✅
+       - cloudflare_access_group	❌
+       - cloudflare_access_identity_provider	✅
+       - cloudflare_access_mutual_tls_certificate	❌
+       - cloudflare_access_policy	❌
+       - cloudflare_access_rule	✅
+       - cloudflare_access_service_token	✅
+       - cloudflare_account_member	✅
+       - cloudflare_api_token	❌
+       - cloudflare_argo	✅
+       - cloudflare_argo_tunnel	✅
+       - cloudflare_authenticated_origin_pulls	❌
+       - cloudflare_authenticated_origin_pulls_certificate	❌
+       - cloudflare_byo_ip_prefix	✅
+       - [cloudflare_certificate_pack]Ï(https://www.terraform.io/docs/providers/cloudflare/r/certificate_pack)	✅
+       - cloudflare_custom_hostname	✅
+       - cloudflare_custom_hostname_fallback_origin	✅
+       - cloudflare_custom_pages	✅
+       - cloudflare_custom_ssl	❌
+       - cloudflare_filter	✅
+       - cloudflare_firewall_rule	✅
+       - cloudflare_healthcheck	✅
+       - cloudflare_ip_list	❌
+       - cloudflare_load_balancer	✅
+       - cloudflare_load_balancer_monitor	✅
+       - cloudflare_load_balancer_pool	✅
+       - cloudflare_logpull_retention	❌
+       - cloudflare_logpush_job	✅
+       - cloudflare_logpush_ownership_challenge	❌
+       - cloudflare_magic_firewall_ruleset	❌
+       - cloudflare_origin_ca_certificate	✅
+       - cloudflare_page_rule	✅
+       - cloudflare_rate_limit	✅
+       - cloudflare_record	✅
+       - cloudflare_ruleset	✅
+       - cloudflare_spectrum_application	✅
+       - cloudflare_waf_group	❌
+       - cloudflare_waf_override	✅
+       - cloudflare_waf_package	❌
+       - cloudflare_waf_rule	❌
+       - cloudflare_waiting_room	✅
+       - cloudflare_worker_cron_trigger	❌
+       - cloudflare_worker_route	✅
+       - cloudflare_worker_script	❌
+       - cloudflare_workers_kv	❌
+       - cloudflare_workers_kv_namespace	✅
+       - cloudflare_zone	✅
+       - cloudflare_zone_dnssec	❌
+       - cloudflare_zone_lockdown	✅
+       - cloudflare_zone_settings_override ✅
+
+
+
+
+    

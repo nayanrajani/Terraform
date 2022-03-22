@@ -1,0 +1,97 @@
+Generate Commands [ONLY ✅ not ❌]
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_application" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_access_identity_provider" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_rule" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_service_token" >> GC-GenerateRecords.tf
+
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_argo" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_argo_tunnel" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_byo_ip_prefix" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_certificate_pack" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_hostname" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_hostname_fallback_origin" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_pages" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_filter" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_firewall_rule" >> GC-GenerateRecords.tf
+
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer_monitor" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer_pool" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone a67ca0cbdbabc94aba9b604bb5d89ec0 --resource-type "cloudflare_logpush_job" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_origin_ca_certificate" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_page_rule" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_rate_limit" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_ruleset" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_spectrum_application" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_waf_override" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_waiting_room" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_worker_cron_trigger" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_worker_route" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_workers_kv_namespace" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone_lockdown" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone_settings_override" >> GC-GenerateRecords.tf
+
+
+Import Commands [ONLY ✅ not ❌]
+
+
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_rule" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_service_token" >> GC-ImportRecords.txt
+
+
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_argo_tunnel" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_byo_ip_prefix" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_certificate_pack" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_hostname" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_hostname_fallback_origin" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_custom_pages" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_filter" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_firewall_rule" >> GC-ImportRecords.txt
+
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer_monitor" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_load_balancer_pool" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone a67ca0cbdbabc94aba9b604bb5d89ec0 --resource-type "cloudflare_logpush_job" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_origin_ca_certificate" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_page_rule" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_rate_limit" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_ruleset" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_spectrum_application" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_waf_override" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_waiting_room" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_worker_cron_trigger" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_worker_route" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_workers_kv_namespace" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone_lockdown" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_zone_settings_override" >> GC-ImportRecords.txt
+
+NOT Working Commands
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_access_application" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_access_identity_provider" >> GC-ImportRecords.txt
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_argo" >> GC-ImportRecords.txt
+
+Error
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_account_member" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_account_member" >> GC-ImportRecords.txt
+
+Not supported
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_healthcheck" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_healthcheck" >> GC-ImportRecords.txt
+
+
+Nykaa
+
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 44ad037417b384f796f7c53be12ee845 --resource-type "cloudflare_certificate_pack" >> GC-GenerateRecords.tf
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 44ad037417b384f796f7c53be12ee845 --resource-type "cloudflare_certificate_pack" >> GC-GenerateRecords.tf
+
+
+Manual
+
+go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_access_policy" >> GC-GenerateRecords.tf
+
+
+go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --account 63aa4349b5d9134c55d699ef7db2a636 --resource-type "cloudflare_access_policy" >> GC-ImportRecords.txt
