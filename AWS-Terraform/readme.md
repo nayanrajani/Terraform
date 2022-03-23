@@ -13,7 +13,7 @@
 
 - Now crete a .tf file in folder and start writing down the code.
 
-- After all the configuration, run terraform init to initialise the terraform inside this folder.
+- After all the configuration, run terraform init to initialize the terraform inside this folder.
 
 - now run terraform plan, to see the changes going to be take place in actual env.
 

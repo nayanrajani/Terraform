@@ -120,7 +120,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - check with cmd by 
     - terraform -v
 
-# Initialise Terraform
+# Initialize Terraform
 - Introduction to Terraform init
     - This tutorial shows you how to get started with Terraform. The tutorial uses an example scenario where you have a web server for your domain that is accessible on 203.0.113.10 and you just signed up your domain (example.com) on Cloudflare to manage everything in Terraform.
 
@@ -249,7 +249,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
         - resource "cloudflare_record"
         - resource "cloudflare_page_rule"
 
-- Destroy Resources
+# Destroying Infrastructure with Terraform 
     - If you keep the infrastructure running, you will get charged for it.
     - Hence it is important for us to also know on how we can delete the infrastructure resources created via terraform.
 
@@ -287,9 +287,9 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
 - But if you ever deleted both state file even backup as well, then the resources you have created earlier they will get conflict or may be they will create another resources.
 
-# Desired and Current State
+# Understanding Desired and Current State
 - Desired State
-    - Terraform's primary function is to create, modify, and destrpy infrastructure resources to match the desired state described in a terraform configuration.
+    - Terraform's primary function is to create, modify, and destroy infrastructure resources to match the desired state described in a terraform configuration.
 
 - Current State
     - Current state is the actual state of a resource.
@@ -299,7 +299,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - If there is a difference between the two, terraform plan presents a description of the changes necessary to achieve the desired state.
 
 - Terraform refresh
-    - For an instance, if any of the infrstaructure is deleted or updated from the GUI perspective.
+    - For an instance, if any of the infrastructure is deleted or updated from the GUI perspective.
     - then this command will get the changes and update the tf state file.
     - Example
         - Terraform apply
@@ -310,3 +310,41 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
 # Note
 - Always read the terraform carefully before apply, because sometime due to different configurations or architectural things, it may destroy and create a new resource(also it may destroy insider configuration of a resource).
+
+# Challenges with the current state on computed values
+- Current State
+    - Current state is the actual state of a resources that is currently deployed.
+
+    - when someone apply some changes in the dashboard and it doesn't reflect in terraform.tfstate.
+        - try to run below command for getting changes 
+            - terraform refresh 
+
+    - So, when you discuss the desired state, if you look at the first specific PPT, it indicates that the main function of Terraforms is to create, modify and destroy the infrastructure resource to match the state described in the Terraform configuration.
+
+    - The second part is therefore very important. The desired state described in a Terraform configuration.
+
+    - Now, in this Terraform configuration, we have never described that the security group should be by default.
+
+    - Thus, the security group is not part of their desired state at all. Thus, even if for the infrastructure you are modifying, configurations that are not part of their desired state, the next time you make a "terraform plan", the terraform plan will not show you any details to cancel these amendments. 
+    
+    - And this is the reason why it is generally recommended that whenever you go ahead and create a resource as an instance, do not specify only minimal things, specify all the important things that are necessary, including the IAM role, security groups, and various other areas as part of your Terraform configuration so that it always matches the desired state whenever you add a Terraform plan in the future.
+
+# Provider Versioning
+- Overview 
+    - Provider plugins are released separately from Terraform itself.
+    - They have different set of version numbers.
+
+- Explicitly Setting provider version
+    - During terraform init, if version argument is not specified, the most recent provider will be downloaded during initialization.
+
+    - For production use, you should constrain the acceptable provider versions via configuration, to ensure that new versions with breaking changes will not be automatically installed.
+
+- Arguments for specifying provider
+    - there are multiple ways for specifying the version of a provider
+
+    | Version Number Arguments   | Description                        |
+    | -------------------------- | ---------------------------------- |
+    | >=1.0                      | Greater than equal to the version  |
+    | <=1.0                      | Less than equal to the version     |
+    | ~>2.0                      | Any Version in the 2.X range       |
+    | >=2.10, <=2.30             | Any version between 2.10 and 2.30  |
