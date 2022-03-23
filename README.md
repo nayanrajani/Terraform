@@ -342,9 +342,12 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - Arguments for specifying provider
     - there are multiple ways for specifying the version of a provider
 
+
     | Version Number Arguments   | Description                        |
     | -------------------------- | ---------------------------------- |
     | >=1.0                      | Greater than equal to the version  |
     | <=1.0                      | Less than equal to the version     |
     | ~>2.0                      | Any Version in the 2.X range       |
     | >=2.10, <=2.30             | Any version between 2.10 and 2.30  |
+
+    - 
