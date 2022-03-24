@@ -51,9 +51,9 @@
 7. Execute the below command in cmd to get all resources of 1 resource-type and add the same to our tf file.
 - For more commands refer CF-terraform-Buffer
 
-    - go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record"
+    - go run cmd/cf-terraforming/main.go generate --key <Global_Key> --email <Email> --zone <Zone_id> --resource-type "cloudflare_record"
 
-	- go run cmd/cf-terraforming/main.go generate --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-GenerateRecords.tf
+	- go run cmd/cf-terraforming/main.go generate --key <Global_Key> --email <Email> --zone <Zone_id> --resource-type "cloudflare_record" >> GC-GenerateRecords.tf
 
         - then add this below code into GC-GenerateRecords.tf before the resources
             terraform {
@@ -78,7 +78,7 @@ NOTE: (optional, only if you use a single token for all resources) and then add 
 
 8. Now run the below command in cmd for import the resources
 - For more commands refer CF-terraform-Buffer 
-    - go run cmd/cf-terraforming/main.go import --key 4ef065aa7da010a6eca9e97fb8d3123d1efbf --email nayan.rajani@blazeclan.com --zone 0d32a989ca0e8d5e9155163f9f937d2b --resource-type "cloudflare_record" >> GC-ImportRecords.txt
+    - go run cmd/cf-terraforming/main.go import --key <Global_Key> --email <Email> --zone <Zone_id> --resource-type "cloudflare_record" >> GC-ImportRecords.txt
         - then go to GC-ImportRecords.txt file and manage all the import commands 
             - For Windows
                 - with CTRL + F in search bar type-> "\n" and select regular expression 
@@ -87,7 +87,7 @@ NOTE: (optional, only if you use a single token for all resources) and then add 
                     - 2>> err.txt 1>> out.txt will give you the output for any error or successful execution
 		- Check with "type err.txt" in command or directly in the err.txt file
             - example
-                - terraform import cloudflare_record.terraform_managed_resource_645f47b718d443cb9ab8c35d49cc8703 0d32a989ca0e8d5e9155163f9f937d2b/645f47b718d443cb9ab8c35d49cc8703 && terraform import cloudflare_record.terraform_managed_resource_c8de0a233a9d5f242998c2616a90dd9c 0d32a989ca0e8d5e9155163f9f937d2b/c8de0a233a9d5f242998c2616a90dd9c && terraform import cloudflare_record.terraform_managed_resource_7509d548659900a7e7da340516beb2f6 0d32a989ca0e8d5e9155163f9f937d2b/7509d548659900a7e7da340516beb2f6 && terraform import cloudflare_record.terraform_managed_resource_f8cef1528ed4983d87717ebd8dd7d50b 0d32a989ca0e8d5e9155163f9f937d2b/f8cef1528ed4983d87717ebd8dd7d50b && terraform import cloudflare_record.terraform_managed_resource_caa8b51d744d8ac1c092e6ce7d0dcbcf 0d32a989ca0e8d5e9155163f9f937d2b/caa8b51d744d8ac1c092e6ce7d0dcbcfterraform import cloudflare_page_rule.terraform_managed_resource_6bd7fa54e86758d72df12957ae463bc9 0d32a989ca0e8d5e9155163f9f937d2b/6bd7fa54e86758d72df12957ae463bc9
+                - terraform import cloudflare_record.terraform_managed_resource_645f47b718d443cb9ab8c35d49cc8703 <Zone_id>/645f47b718d443cb9ab8c35d49cc8703 && terraform import cloudflare_record.terraform_managed_resource_c8de0a233a9d5f242998c2616a90dd9c <Zone_id>/c8de0a233a9d5f242998c2616a90dd9c && terraform import cloudflare_record.terraform_managed_resource_7509d548659900a7e7da340516beb2f6 <Zone_id>/7509d548659900a7e7da340516beb2f6 && terraform import cloudflare_record.terraform_managed_resource_f8cef1528ed4983d87717ebd8dd7d50b <Zone_id>/f8cef1528ed4983d87717ebd8dd7d50b && terraform import cloudflare_record.terraform_managed_resource_caa8b51d744d8ac1c092e6ce7d0dcbcf <Zone_id>/caa8b51d744d8ac1c092e6ce7d0dcbcfterraform import cloudflare_page_rule.terraform_managed_resource_6bd7fa54e86758d72df12957ae463bc9 <Zone_id>/6bd7fa54e86758d72df12957ae463bc9
         - then run above command in cmd to get all resources to be imported in a tf state file
         - then run terraform plan, to see no change between cloudflare configs and terraform configs.
 
