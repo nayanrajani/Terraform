@@ -1,8 +1,8 @@
 variable "AWS_AccessID" {
-  default = "AKIA5FOTFZWZFYACZPUT"
   sensitive = true
   type = string
-  description = "<Please Enter your Keys here>"
+  description = "Please enter Access id"
+  default = "<Please Enter your Keys here>"
 }
 
 variable "AWS_Secret_Access"{
