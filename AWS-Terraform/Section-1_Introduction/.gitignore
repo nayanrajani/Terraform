@@ -1,5 +1,5 @@
-keys
+.keys
 .terraform
 .terraform.lock.hcl
 
-variable
+.variable
