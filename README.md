@@ -328,6 +328,28 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - Thus, the security group is not part of their desired state at all. Thus, even if for the infrastructure you are modifying, configurations that are not part of their desired state, the next time you make a "terraform plan", the terraform plan will not show you any details to cancel these amendments. 
     
     - And this is the reason why it is generally recommended that whenever you go ahead and create a resource as an instance, do not specify only minimal things, specify all the important things that are necessary, including the IAM role, security groups, and various other areas as part of your Terraform configuration so that it always matches the desired state whenever you add a Terraform plan in the future.
+    
+# Deploying Infrastructure with Terraform
+
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+- Basically to create any resource we need to create authentication method:
+    - static auth
+        - Access key and secret key
+        - go to IAM, then users -> select yours
+        - security credentials -> or use last credentials
+        - save it
+
+- Now you have to be careful about the providers and the resources we are using, it may change for others.
+
+- Now crete a .tf file in folder and start writing down the code.
+
+- After all the configuration, run terraform init to initialize the terraform inside this folder.
+
+- now run terraform plan, to see the changes going to be take place in actual env.
+
+- check if everything is good, then terraform apply
+- okay
 
 # Provider Versioning
 - Overview 
