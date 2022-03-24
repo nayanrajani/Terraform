@@ -26,7 +26,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - Configure Cloudflare using HashiCorp's “Infrastructure as Code” tool, Terraform. With
         Cloudflare’s Terraform provider, you can manage your edge using the same familiar tools you use to automate the rest of your infrastructure. Define and store configuration in source code repositories like GitHub, track and version changes over time, and roll back when needed all without needing to use the Cloudflare APIs.
 
-# Some of the Toolset for  (Infrastructure as a code)
+# Some of the Tool-set for  (Infrastructure as a code)
 
 # Choosing a right Infrastructure as Code tool
 - there are various type IAAC to deploy:
@@ -350,4 +350,36 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     | ~>2.0                      | Any Version in the 2.X range       |
     | >=2.10, <=2.30             | Any version between 2.10 and 2.30  |
 
-    - 
+    - if tou face any difficulty just delete the .terraform.lock.hcl file and change the provider version accordingly. 
+
+    - Dependency Lock File
+        - Terraform dependency lock file allows us to lock to a specific version of provider.
+        - If a particular provider already has a selection recorded in the lock file, Terraform will always re-select that version for installation, even if a newer version has become available.
+        - You can override that behavior by adding the -upgrade option in terraform init.
+            - Terraform init -upgrade.
+
+        - https://docs.google.com/document/d/179clqsxOGQa-iGKu1dcmz89Vpso9-7Of8opIkXwPr_k/edit?usp=sharing
+
+# Read, Generate, Modify Configuration
+- Overview of the Format
+    - We tend to use a different folder for each that we do in the course.
+    - This allows us to be more systematic and allows easier revisit in-case required.
+
+    | Lecture Name               | Folder Names |
+    | -------------------------- | ------------ |
+    | Create First EC@ Instance  | Folder 1     |
+    | Tainting Resources         | Folder 2     |
+    | Conditional Expression     | Folder 3     |
+
+-  Delete/Destroy Resources after Practical
+
+# Attributes & Output Values
+- Terraform has capability to output the attribute of a resource with the output values.
+
+    - Example
+        - ec2_public_ip = 35.161.21.197
+        - bucket_identifier = terraform-test-kplabs.s3.amazonaws.com
+
+- An outputted attributes can not only be used for the user reference but it can also act as a input to other resources.
+    - Example
+        - After Elastic Ip is created, it's IP address should automatically get whitelisted in the security group.

@@ -14,8 +14,19 @@ provider "aws" {
   secret_key = var.AWS_Secret_Access
 }
 
-resource "aws_instance" "ec2" {
-  
-  ami = "ami-04893cdb768d0f9ee" //If it is not working change the region and then try
-  instance_type = "t2.micro"
+resource "aws_eip" "lb" {
+  vpc      = true
 }
+
+# output "eip" {
+#   value = aws_eip.lb
+# }
+
+resource "aws_s3_bucket" "mys3" {
+  bucket = "nayan-practice-training-s3"
+}
+
+# output "mys3bucket" {
+#   value = aws_s3_bucket.mys3
+# }
+
