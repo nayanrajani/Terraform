@@ -383,3 +383,39 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - An outputted attributes can not only be used for the user reference but it can also act as a input to other resources.
     - Example
         - After Elastic Ip is created, it's IP address should automatically get whitelisted in the security group.
+
+- Let's try with code
+    - create a tf file and add this code after provider
+
+        resource "aws_eip" "lb" {
+            vpc      = true
+        }
+
+        resource "aws_s3_bucket" "mys3" {
+            bucket = "nayan-practice-training-s3"
+        }
+    - then terraform plan
+    - terraform apply
+    - then check in the AWS Dashboard
+
+- No we will work with Output
+    - add the below code after there own resources
+
+        output "eip" {
+            value = aws_eip.lb.public_ip
+        }
+
+        output "mys3bucket" {
+            value = aws_s3_bucket.mys3.bucket_domain_name
+        }
+
+    - then terraform destroy 
+    - terraform apply
+        - on the cmd you will be able to see the outputs
+            - eip = "3.111.253.15"
+            - mys3bucket = "nayan-practice-training-s3.s3.amazonaws.com"
+    - we can get more things(check Attribute reference documentation for it)
+
+- Now, the output basically contains all the output attributes that you might have set in your TF file and 
+
+- Resources are the actual underlying resources that were created through Terraform. 
