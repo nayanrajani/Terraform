@@ -1,5 +1,4 @@
-/keys.txt
-/.terraform
-/.terraform.lock.hcl
 
-/variable.tf
+.terraform
+.terraform.lock.hcl
+
