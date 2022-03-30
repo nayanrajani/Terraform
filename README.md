@@ -441,3 +441,15 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - Now, the output basically contains all the output attributes that you might have set in your TF file and 
 
 - Resources are the actual underlying resources that were created through Terraform. 
+
+
+# Referencing Cross-Resource Attributes
+- This is basically to associate or attach the the things to other resources
+    - First, We are going to create EC2 instance and attaching a Elastic Ip to it via Associating
+        
+        resource "aws_eip_association" "eip_assoc" {
+            instance_id   = aws_instance.web.id
+            allocation_id = aws_eip.example.id
+        }
+
+    - Second, We are going to create Security group and attaching the Elastic Ip to it via Associating.
