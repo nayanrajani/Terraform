@@ -129,7 +129,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 ​   1. Define your first Terraform config file
         - Create an initial Terraform config file. Any files ending in .tf will be processed by Terraform. As the configuration becomes more complex, you will want to split the config into separate files and modules. For now, proceed with a single file.
 
-        - then add this configuration accoring to your domain
+        - then add this configuration according to your domain
 
             terraform { 
                 required_providers {

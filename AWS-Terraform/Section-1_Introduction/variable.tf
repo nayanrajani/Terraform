@@ -1,5 +1,5 @@
 variable "AWS_AccessID" {
-  default = "AKIA5FOTFZWZFYACZPUT"
+  default = "Please enter Token id"
   sensitive = true
   type = string
   description = "<Please Enter your Keys here>"
