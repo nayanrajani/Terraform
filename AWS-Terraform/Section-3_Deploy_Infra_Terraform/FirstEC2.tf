@@ -17,7 +17,7 @@ provider "aws" {
 
 resource "aws_instance" "ec2" {
   
-  ami = "ami-04893cdb768d0f9ee" //If it is not working change the region and then try
+  ami = "ami-01216e7612243e0ef" //If it is not working change the region and then try
   instance_type = "t2.micro"
 }
 

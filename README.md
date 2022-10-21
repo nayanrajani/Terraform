@@ -420,7 +420,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - terraform apply
     - then check in the AWS Dashboard
 
-- No we will work with Output
+- Now we will work with Output
     - add the below code after there own resources
 
         output "eip" {
