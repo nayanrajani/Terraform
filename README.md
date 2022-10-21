@@ -479,3 +479,82 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
     - terraform apply
     - terraform destroy
+
+# Terraform Variable
+
+- we can have central source from which we can import the values from. the static files should be kept at one place.
+
+- please avoid doing hard coding.
+
+# Multiple Approaches to variable assignment
+- variables in terraform can be assigned values in multiple ways.
+
+    - Environment variable
+        - in cmd add below command for this
+            - setx TF_VAR_instancetype m5.large
+        - reopen the cmd
+        - type below commmand to check
+            - echo %TF_VAR_instancetype%
+    - Command line flags
+        - terraform plan -var="instancetype=t2.small"
+    - From a file
+        - create a variables.tf file add below code
+            - variable "instancetype" {}
+        - create a file named as "terraform.tfvars"
+        - add the below code
+            - instancetype="t2.large"
+    - Variables Defaults
+        - creating a variable as a default value
+
+# Data types for variables
+- The type argument in a variable block allows you to restrict the type of the value that will be accepted as the value for a variable
+
+    variable "image_id" {
+        type = string
+    }
+
+    - if no type is given, it will accept any type.
+
+    - string
+        - Sequence of a unicode character
+    - list
+        - Sequence list of values identified by their position starts with 0. ["nayan", "Rajani"]
+    - map
+        - a group of values identified by named labels. {Key, value}
+    - number
+        - 200, 400, 349
+
+# Fetch data from List and Map
+- Use case-  how we can reference the value from one of the part of list and map
+- Check section 4 -> attributes.tf
+
+# Count Parameter and Count Index
+- Count Parameter
+    - The count parameter on resources can simplify configurations and let you scale resources by simply incrementing a number.
+
+    - let's assume, you need to create two EC2 instances. One of the common approach is to define two separate blocks for aws_instance. 
+
+    - With count parameter, we can simply specify the count value and the resource can be scaled accordingly.
+
+        resource "aws_instance" "myec21" {
+            ami = "ami-082b5a644766e0e6f"
+            instance_type = "t2.micro"
+            count = 5
+        }
+
+- Count Index
+    - In Resource blocks where count is set, an additional count object is available in expressions, so you can modify the configuration of each instance.
+
+    - this object has one attribute:
+        resource "aws_iam_user" "lb" {
+            name = "loadbalancer.${count.index}"
+            count = 5
+            path = "/system/"
+        }
+
+    - With naming convention
+        resource "aws_iam_user" "lb" {
+            name  = var.elb_names[count.index]
+            count = 3
+            path = "/system/"
+        }

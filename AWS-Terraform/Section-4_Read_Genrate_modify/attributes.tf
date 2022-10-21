@@ -57,3 +57,81 @@ resource "aws_security_group" "allow_tls" {
     Name = "just checking"
   }
 }
+
+# Data types for variables
+
+resource "aws_elb" "bar" {
+  name               = var.elb_name
+  availability_zones = var.az
+
+  listener {
+    instance_port     = 8000
+    instance_protocol = "http"
+    lb_port           = 80
+    lb_protocol       = "http"
+  }
+
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    target              = "HTTP:8000/"
+    interval            = 30
+  }
+
+  cross_zone_load_balancing   = true
+  idle_timeout                = var.timeout
+  connection_draining         = true
+  connection_draining_timeout = var.timeout
+
+  tags = {
+    Name = "foobar-terraform-elb"
+  }
+}
+
+# Fetch data from List and Map
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = var.list[1]
+}
+resource "aws_instance" "myec21" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = var.types["us-west-2"]
+}
+
+variable "list" {
+  type = list
+  default = ["m5.large","m5.xlarge","t2.medium"]
+}
+
+variable "types" {
+  type = map
+  default = {
+    us-east-1 = "t2.micro"
+    us-west-2 = "t2.nano"
+    ap-south-1 = "t2.small"
+  }
+}
+
+# Count Parameter
+
+resource "aws_instance" "myec21" {
+  ami           = "ami-082b5a644766e0e6f"
+  instance_type = "t2.micro"
+  count         = 5
+}
+
+# count index
+
+resource "aws_iam_user" "lb" {
+  name  = "loadbalancer.${count.index}"
+  count = 2
+  path = "/system/"
+}
+
+# With naming convention
+resource "aws_iam_user" "lb" {
+  name  = var.elb_names[count.index]
+  count = 3
+  path = "/system/"
+}
