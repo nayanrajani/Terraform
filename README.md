@@ -453,3 +453,29 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
         }
 
     - Second, We are going to create Security group and attaching the Elastic Ip to it via Associating.
+
+        resource "aws_security_group" "allow_tls" {
+            name        = "Nayan-sample"
+
+            ingress {
+                from_port        = 443
+                to_port          = 443
+                protocol    = "tcp"
+                cidr_blocks      = ["Add elastic ip name"/subnetmask]
+            }
+
+            egress {
+                from_port        = 0
+                to_port          = 0
+                protocol         = "-1"
+                cidr_blocks      = ["0.0.0.0/0"]
+                ipv6_cidr_blocks = ["::/0"]
+            }
+
+            tags = {
+                Name = "allow_tls"
+            }
+        }
+
+    - terraform apply
+    - terraform destroy
