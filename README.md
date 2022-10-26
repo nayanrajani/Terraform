@@ -662,3 +662,17 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - terraform validate
 
 # Load Order & Semantics
+- Terraform generally load all the configuartion files within the directory specified in alphabetical order.
+
+- The files loaded must end in either .tf or .tf.json to specify the format that is in use.
+
+# Dynamic Blocks
+- In many of the use-cases there are repeatable nested blocks that needs to be defined.
+- This can lead to a long code and it can be difficult to manage in a longer time.
+
+- Dynamic 
+    - Dynamic block allows us to dynamically construct repeatable nested blocks which is supported inside resources, data, provider, and provisioner block.
+    
+- Iterator (Optional)
+    - The iterator argument sets the name of a temporary variable that represents the current element of the complex value.
+    - If omitted, the name of the variable defaults to the label of the dynamic block.

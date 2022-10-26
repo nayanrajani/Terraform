@@ -1,19 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
-
-# Configure the AWS Provider
-provider "aws" {
-  region     = "ap-south-1" //Same for the ami
-  access_key = var.AWS_AccessID
-  secret_key = var.AWS_Secret_Access
-}
-
 
 # resource "aws_instance" "ec2" {
 
@@ -219,18 +203,92 @@ provider "aws" {
 #   value = local.time
 # }
 
-# Data Sources
-data "aws_ami" "app_ami" {
-  most_recent = true
-  owners      = ["amazon"] // Owner= google/amazon/azure etc
+# # Data Sources
+# data "aws_ami" "app_ami" {
+#   most_recent = true
+#   owners      = ["amazon"] // Owner= google/amazon/azure etc
 
-  filter { // adding extra filter to filter-out linux images only
-    name   = "name"
-    values = ["amzn2-ami-hvm*"]
+#   filter { // adding extra filter to filter-out linux images only
+#     name   = "name"
+#     values = ["amzn2-ami-hvm*"]
+#   }
+# }
+
+# resource "aws_instance" "instance-1" {
+#   ami           = data.aws_ami.app_ami.id
+#   instance_type = "t2.micro"
+# }
+
+# Dynamic Blocks
+#Dynamic-before.tf 
+resource "aws_security_group" "demo_sg" {
+  name        = "sample-sg"
+
+  ingress {
+    from_port   = 8200
+    to_port     = 8200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8201
+    to_port     = 8201
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8300
+    to_port     = 8300
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 9200
+    to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 9500
+    to_port     = 9500
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-resource "aws_instance" "instance-1" {
-  ami           = data.aws_ami.app_ami.id
-  instance_type = "t2.micro"
+#Dynamic-after.tf
+variable "sg_ports" {
+  type        = list(number)
+  description = "list of ingress ports"
+  default     = [8200, 8201,8300, 9200, 9500]
+}
+
+resource "aws_security_group" "dynamicsg" {
+  name        = "dynamic-sg"
+  description = "Ingress for Vault"
+
+  dynamic "ingress" {
+    for_each = var.sg_ports
+    iterator = port
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.sg_ports
+    content {
+      from_port   = egress.value
+      to_port     = egress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
 }
