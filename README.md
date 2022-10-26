@@ -583,7 +583,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - If overused they can also make a configuration hard to read by future maintainers by hiding the actual values used.
 - Use locals values only in moderation, in situation where a single value or result is used in many places and that value is likely to be changed in future.
 
-# Terraform Functions
+# Terraform Functions (https://developer.hashicorp.com/terraform/language/functions)
 - The terraform language includes a number of built-in functions that you can use to transform and combine values.
 - The general syntax for function calls is a name followed by comma-separated arguments in parentheses:
 
@@ -592,3 +592,19 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - Example
     > max(5,12,9)
     12
+- List of available functions
+    - The terraform language does not support user-defined functions, and so only functions built-in to the language are available for use.
+        - Numeric
+        - String
+        - Collection
+        - Encoding
+        - Filesystem
+        - Date and Time
+        - Hash and Crypto
+        - IP Network
+        - Type Conversion
+
+- try it out with "terraform console" command in cmd.
+- and check the main.tf for more info.
+
+# Data Sources
