@@ -676,3 +676,19 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - Iterator (Optional)
     - The iterator argument sets the name of a temporary variable that represents the current element of the complex value.
     - If omitted, the name of the variable defaults to the label of the dynamic block.
+
+# Tainting Resources
+- you created a new resources via terraform
+- users have made a lot of manual changes.
+- Two ways to deal with it
+    - Import the changes to terraform
+    - delete & recreate the resource
+        - Terraform Taint
+            - The terraform taint command manually marks a terraform-managed resources as tainted, forcing it to be destroyed and recreated on the next apply.
+            - terraform taint aws_instance.myec2
+            - only the local state will be marked as tainted until you apply.
+
+- Pointers
+    - This command will not modify the infra it will modify the state file in order to mark a resource as tainted
+    - Once a resource is marked as tainted the next plan will show that the resource will be destroyed and recreated.
+    - NOTE: That the tainting a resource for recreation may affect resources that depends on the newly tainted resources. 
