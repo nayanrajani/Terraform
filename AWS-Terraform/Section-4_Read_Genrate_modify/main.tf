@@ -153,18 +153,20 @@ provider "aws" {
 #   count = var.istest == false ? 1 : 0
 # }
 
-# Local Value
+# # Local Value
 
-resource "aws_instance" "app-dev" {
+# resource "aws_instance" "app-dev" {
 
-  ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
-  instance_type = "t2.micro"
-  tags = local.common_tags
-}
+#   ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
+#   instance_type = "t2.micro"
+#   tags = local.common_tags
+# }
 
-resource "aws_instance" "db-dev" {
+# resource "aws_instance" "db-dev" {
 
-  ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
-  instance_type = "t2.large"
-  tags = local.common_tags
-}
+#   ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
+#   instance_type = "t2.large"
+#   tags = local.common_tags
+# }
+
+# Terraform Functions

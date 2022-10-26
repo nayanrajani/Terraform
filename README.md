@@ -579,4 +579,16 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             name_prefix = "${var.name != "" ? var.name : var.default}"
         }
 ### Important Points for Local Values
-- 
+- Local values can be helpful to avoid repeating same values or expression multiple times.
+- If overused they can also make a configuration hard to read by future maintainers by hiding the actual values used.
+- Use locals values only in moderation, in situation where a single value or result is used in many places and that value is likely to be changed in future.
+
+# Terraform Functions
+- The terraform language includes a number of built-in functions that you can use to transform and combine values.
+- The general syntax for function calls is a name followed by comma-separated arguments in parentheses:
+
+    function(argument 1, argument 2)
+
+- Example
+    > max(5,12,9)
+    12
