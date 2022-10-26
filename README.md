@@ -692,3 +692,25 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - This command will not modify the infra it will modify the state file in order to mark a resource as tainted
     - Once a resource is marked as tainted the next plan will show that the resource will be destroyed and recreated.
     - NOTE: That the tainting a resource for recreation may affect resources that depends on the newly tainted resources. 
+
+# Splat Expression
+- Splat Expression allows us to get a list of all attributes.
+- You can use in the output section to list all the attributes that are being created.
+    - with the help of "*".
+    - Example
+        resource "aws_iam_user" "lb" {
+            name = "iamuser.${count.index}"
+            count = 3
+            path = "/system/"
+        }
+
+        output "arns" {
+            value = aws_iam_user.lb[*].arn
+        }
+
+# Terraform Graph
+- This allows us to generate a visual representation of either a configuration or execution plan.
+- The output of terraform graph is in the DOT format, which can easily be converted to an image.
+    - terraform graph > graph.dot
+    - download graphviz.gitlab.io
+    - dot -Tpng InputFile.dot -o OutputFile.png (to convert in png)
