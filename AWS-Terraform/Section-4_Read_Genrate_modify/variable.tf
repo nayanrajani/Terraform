@@ -7,7 +7,7 @@ variable "elb_name" {
 }
 
 variable "az" {
-  type = list
+  type = list(any)
 }
 
 variable "timeout" {
@@ -15,7 +15,7 @@ variable "timeout" {
 }
 
 variable "elb_names" {
-    type = list
-    default = ["dev-lb", "stage-lb","prod-lb"]
-  
+  type    = list(any)
+  default = ["dev-lb", "stage-lb", "prod-lb"]
+
 }

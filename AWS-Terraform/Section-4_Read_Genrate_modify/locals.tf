@@ -1,6 +1,6 @@
 locals {
   common_tags = {
-    Owner = "DevOps Team"
+    Owner   = "DevOps Team"
     service = "backend"
   }
 }

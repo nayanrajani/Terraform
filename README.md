@@ -608,3 +608,57 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - and check the main.tf for more info.
 
 # Data Sources
+- Data sources allow data to be fetched or computed for use elsewhere in terraform configuration.
+
+    data "aws_ami" "app_ami" {
+    most_recent = true
+    owners = ["amazon"]  // Owner= google/amazon/azure/Self etc
+
+
+        filter {        // adding extra filter to filter-out linux images only
+            name   = "name"
+            values = ["amzn2-ami-hvm*"]
+        }
+    }
+
+    resource "aws_instance" "instance-1" {
+        ami = data.aws_ami.app_ami.id
+        instance_type = "t2.micro"
+    }
+
+    - Defined under the block
+    - Reads from a specific data source(aws_ami) and exports results under "app_ami"
+
+- Note - Filters in Data Sources
+    - If you need to find more details related to options that can be used in filters, you can refer to the following AWS documentation:
+
+    https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+
+    Refer to the --filters option
+
+    Note: This additional details is beyond the scope of certification.
+
+# Debugging in Terraform
+- terraform has detailed logs which can be enabled by setting the TF_LOG environment variable to any value.
+
+- you can set TF_LOG to one of the log levels TRACE, DEBUG, INFO, WARN, or ERROR to Change the verbosity of the logs.
+
+- pointers
+    - TRACE is the most verbose and it is default if TF_LOG is set to something other than a log level name.
+    - To persist logged output you can set TF_LOG_PATH in order to force log to always be append  to specific file when logging is enabled.
+
+# Terraform Format
+- Anyone whi is into programming knows the importance of formatting the code for readability.
+
+- The terraform fmt command is used to rewrite terraform files to take care of the overall formatting
+
+    - cli
+    - terraform fmt
+
+# Terraform Validate
+- terraform validate primarily checks whether a configuration is syntactically valid.
+- it can check various aspects including unsupported arguments, undeclared variables and others.
+
+    - terraform validate
+
+# Load Order & Semantics
