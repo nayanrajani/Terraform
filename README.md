@@ -542,7 +542,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             count = 5
         }
 
-- Count Index
+# Count Index
     - In Resource blocks where count is set, an additional count object is available in expressions, so you can modify the configuration of each instance.
 
     - this object has one attribute:
@@ -558,3 +558,25 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             count = 3
             path = "/system/"
         }
+
+# Conditional Expression
+    - A conditional expression uses the value of a bool expression to select one of two values.
+    - syntax:
+        - condition ? true_val : false_val
+
+# Local Values
+    - A local value assigns a name to an expression, allowing it to be used multiple times within a module without repeating it.
+    - syntax
+        - create a local file and add tags inside "locals {}".
+        - then access this tags in other file by
+            - local.tagname
+        - terraform plan
+    
+    - Local Values Support for Expression
+        - Local values can be used for multiple different use-cases like having a conditional expression.
+
+        locals {
+            name_prefix = "${var.name != "" ? var.name : var.default}"
+        }
+## Important Points for Local Values
+- 
