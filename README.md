@@ -714,3 +714,42 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - terraform graph > graph.dot
     - download graphviz.gitlab.io
     - dot -Tpng InputFile.dot -o OutputFile.png (to convert in png)
+
+# Terraform Plan File
+- the generated terraform plan can be saved to a specific path.
+- this plan can be used with terraform apply to be certain that only changes shown in this plan are applied.
+    - Syntax
+        - terraform plan -out=path
+        - terraform apply "nameoffile"
+
+# Terraform Output
+- terraform output command is used to extract the value of an output from the state file.
+    - terraform output iam_name
+
+# Terraform Settings
+- The special terraform configuration block types is used to configured some behaviors of terraform itself, such as requiring version to apply your configuration.
+
+    - Terraform Version
+        - terraform {
+            required_version => "> 0.12.0"
+        }
+    - Provider Version
+        - terraform {
+            required_providers {
+                mycloud = {
+                    source = "mycorp/cloud"
+                    version = "~>1.0"
+                }
+            }
+        }
+        
+# Dealing with larger Infrastructure
+- -refresh=false
+- -target=ec2
+- -auto-approve (no need to type "yes" again)
+- ~ => Update resource
+- + => Add resource
+- - => Destroy resource
+
+# Zipmap Function
+- The zipmap function construct a map from a list of keys and a corresponding list of values.
