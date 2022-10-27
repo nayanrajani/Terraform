@@ -294,11 +294,12 @@
 # }
 
 # # Challenges with count
+# # to be used when resources are identical
 # variable "iam_names" {
 #   type = list
 #   default = ["user-0","user-1", "user-2", "user-3"]
 #   /*here it will mess-up if you add in the starting, then it will change in all.
-#   and you will get error while applying*/ 
+#   and you will get error while applying because of tf state file*/ 
 # }
 
 # resource "aws_iam_user" "iam" {

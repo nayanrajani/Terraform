@@ -762,3 +762,18 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - //Comments
 - #single line comments
 - /*Comments*/
+
+# Data Type - SET
+- SET is used to stored multiple items in a single variable.
+- SET items are unordered and no duplicates allowed.
+    - toset dunction
+        - toset function will convert the list of values to set.
+            - toset(["a", "b", "c", "a"])
+              > toset(["a", "b", "c"])
+
+# for_each (Meta-argument)
+- make use of map/set as an index value of the created resource.
+    resource "aws_iam_user" "iam" {
+        for_each = toset(["user-1", "user-2", "user-3"])
+        name = each.key
+    }
