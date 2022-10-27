@@ -753,3 +753,12 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
 # Zipmap Function
 - The zipmap function construct a map from a list of keys and a corresponding list of values.
+- syntax
+    - cli
+    - terraform console
+    - zipmap([keys], [values])
+
+# Comments in terraform
+- //Comments
+- #single line comments
+- /*Comments*/
