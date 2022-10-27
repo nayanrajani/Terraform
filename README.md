@@ -902,4 +902,4 @@ resource "aws_instance" "myec2" {
         - raise an error and stop applying. if this is a creation provisioner, taint the resource.
 
 ## Null Response
-- 
+- https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource
