@@ -292,3 +292,17 @@
 #     }
 #   }
 # }
+
+# # Challenges with count
+# variable "iam_names" {
+#   type = list
+#   default = ["user-0","user-1", "user-2", "user-3"]
+#   /*here it will mess-up if you add in the starting, then it will change in all.
+#   and you will get error while applying*/ 
+# }
+
+# resource "aws_iam_user" "iam" {
+#     name = var.iam_names[count.index]
+#     count = 4
+#     path = "/system/"
+# }
