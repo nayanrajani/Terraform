@@ -44,12 +44,12 @@
 #   }
 # }
 
-# local-exec provisioners
-resource "aws_instance" "myec2" {
-  ami           = "ami-0e6329e222e662a52" //If it is not working change the region and then try
-  instance_type = "t2.micro"
+# # local-exec provisioners
+# resource "aws_instance" "myec2" {
+#   ami           = "ami-0e6329e222e662a52" //If it is not working change the region and then try
+#   instance_type = "t2.micro"
 
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.myec2.private_ip} >> private_ips.txt"
-  }
-}
+#   provisioner "local-exec" {
+#     command = "echo ${aws_instance.myec2.private_ip} >> private_ips.txt"
+#   }
+# }

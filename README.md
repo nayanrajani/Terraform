@@ -886,3 +886,20 @@ resource "aws_instance" "myec2" {
 - echo, if it show echo is on then great
 - terraform plan
 - terraform apply -auto-approve
+
+## Creation-Time Provisioner
+- This only run during the time of creation, not during updating or any other lifecycle.
+- If a C-t provisioner fails, the resource is marked as tainted.
+## Destroy-Time Provisioners
+- This run before the resource is destroyed.
+
+## Failure Behavior for provisioners
+- By default, if provisioner fails then terraform apply will fail itself.
+- the on_failure setting can used to change this behavior
+    - continue
+        - ignore the error and continue with creation or destruction.
+    - fail
+        - raise an error and stop applying. if this is a creation provisioner, taint the resource.
+
+## Null Response
+- 
