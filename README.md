@@ -868,3 +868,21 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - terraform plan
     - terraform apply -auto-approve
     - check via ssh and via public_ip
+
+## local-exec provisioners
+
+resource "aws_instance" "myec2" {
+    ami           = "ami-0e6329e222e662a52" //If it is not working change the region and then try
+    instance_type = "t2.micro"
+
+    provisioner "local-exec" {
+        command = "echo ${aws_instance.web.private_ip} >> private_ips.txt"
+
+    }
+}
+
+- cmd
+- goto terraform running folder
+- echo, if it show echo is on then great
+- terraform plan
+- terraform apply -auto-approve
