@@ -217,7 +217,8 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
             - last update
 
-# Providers and Resources
+# Deploying Infrastructure with terraform
+## Providers and Resources
 - Providers
     - Terraform Supports Multiple Providers
     - Depending on what type of infrastructure you want to launch, we ave to use appropriate providers accordingly.
@@ -249,7 +250,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
         - resource "cloudflare_record"
         - resource "cloudflare_page_rule"
 
-# Destroying Infrastructure with Terraform 
+## Destroying Infrastructure with Terraform 
     - If you keep the infrastructure running, you will get charged for it.
     - Hence it is important for us to also know on how we can delete the infrastructure resources created via terraform.
 
@@ -276,7 +277,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - Remove the code 
         - Either remove the code or comment out(/*Code*/) the part that you have removed, otherwise terraform plan will show you to create again, due to configuration file mismatch.
 
-# Understand Terraform State File
+## Understand Terraform State File
 - Terraform stores the state of the infrastructure that is being created from the .tf files.
 
 - This state allows terraform to map real world resource to your existing configuration.
@@ -287,7 +288,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
 - But if you ever deleted both state file even backup as well, then the resources you have created earlier they will get conflict or may be they will create another resources.
 
-# Understanding Desired and Current State
+## Understanding Desired and Current State
 - Desired State
     - Terraform's primary function is to create, modify, and destroy infrastructure resources to match the desired state described in a terraform configuration.
 
@@ -308,10 +309,10 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
         - terraform plan, you will get to see that there is some change in configuration, but the terraform will tell to go back to desired state that has been set by terraform.
         - terraform apply, to save the changes.
 
-# Note
+## Note
 - Always read the terraform carefully before apply, because sometime due to different configurations or architectural things, it may destroy and create a new resource(also it may destroy insider configuration of a resource).
 
-# Challenges with the current state on computed values
+## Challenges with the current state on computed values
 - Current State
     - Current state is the actual state of a resources that is currently deployed.
 
@@ -329,7 +330,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     
     - And this is the reason why it is generally recommended that whenever you go ahead and create a resource as an instance, do not specify only minimal things, specify all the important things that are necessary, including the IAM role, security groups, and various other areas as part of your Terraform configuration so that it always matches the desired state whenever you add a Terraform plan in the future.
     
-# Deploying Infrastructure with Terraform
+## Deploying Infrastructure with Terraform
 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
@@ -351,7 +352,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - check if everything is good, then terraform apply
 - okay
 
-# Provider Versioning
+## Provider Versioning
 - Overview 
     - Provider plugins are released separately from Terraform itself.
     - They have different set of version numbers.
@@ -395,7 +396,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
 -  Delete/Destroy Resources after Practical
 
-# Attributes & Output Values
+## Attributes & Output Values
 - Terraform has capability to output the attribute of a resource with the output values.
 
     - Example
@@ -443,7 +444,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - Resources are the actual underlying resources that were created through Terraform. 
 
 
-# Referencing Cross-Resource Attributes
+## Referencing Cross-Resource Attributes
 - This is basically to associate or attach the the things to other resources
     - First, We are going to create EC2 instance and attaching a Elastic Ip to it via Associating
         
@@ -480,13 +481,13 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - terraform apply
     - terraform destroy
 
-# Terraform Variable
+## Terraform Variable
 
 - we can have central source from which we can import the values from. the static files should be kept at one place.
 
 - please avoid doing hard coding.
 
-# Multiple Approaches to variable assignment
+## Multiple Approaches to variable assignment
 - variables in terraform can be assigned values in multiple ways.
 
     - Environment variable
@@ -506,7 +507,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - Variables Defaults
         - creating a variable as a default value
 
-# Data types for variables
+## Data types for variables
 - The type argument in a variable block allows you to restrict the type of the value that will be accepted as the value for a variable
 
     variable "image_id" {
@@ -524,11 +525,11 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - number
         - 200, 400, 349
 
-# Fetch data from List and Map
+## Fetch data from List and Map
 - Use case-  how we can reference the value from one of the part of list and map
 - Check section 4 -> attributes.tf
 
-# Count Parameter and Count Index
+## Count Parameter and Count Index
 - Count Parameter
     - The count parameter on resources can simplify configurations and let you scale resources by simply incrementing a number.
 
@@ -542,7 +543,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             count = 5
         }
 
-# Count Index
+## Count Index
     - In Resource blocks where count is set, an additional count object is available in expressions, so you can modify the configuration of each instance.
 
     - this object has one attribute:
@@ -559,12 +560,12 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             path = "/system/"
         }
 
-# Conditional Expression
+## Conditional Expression
     - A conditional expression uses the value of a bool expression to select one of two values.
     - syntax:
         - condition ? true_val : false_val
 
-# Local Values
+## Local Values
     - A local value assigns a name to an expression, allowing it to be used multiple times within a module without repeating it.
     - syntax
         - create a local file and add tags inside "locals {}".
@@ -583,7 +584,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - If overused they can also make a configuration hard to read by future maintainers by hiding the actual values used.
 - Use locals values only in moderation, in situation where a single value or result is used in many places and that value is likely to be changed in future.
 
-# Terraform Functions (https://developer.hashicorp.com/terraform/language/functions)
+## Terraform Functions (https://developer.hashicorp.com/terraform/language/functions)
 - The terraform language includes a number of built-in functions that you can use to transform and combine values.
 - The general syntax for function calls is a name followed by comma-separated arguments in parentheses:
 
@@ -607,7 +608,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - try it out with "terraform console" command in cmd.
 - and check the main.tf for more info.
 
-# Data Sources
+## Data Sources
 - Data sources allow data to be fetched or computed for use elsewhere in terraform configuration.
 
     data "aws_ami" "app_ami" {
@@ -638,7 +639,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
     Note: This additional details is beyond the scope of certification.
 
-# Debugging in Terraform
+## Debugging in Terraform
 - terraform has detailed logs which can be enabled by setting the TF_LOG environment variable to any value.
 
 - you can set TF_LOG to one of the log levels TRACE, DEBUG, INFO, WARN, or ERROR to Change the verbosity of the logs.
@@ -647,7 +648,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - TRACE is the most verbose and it is default if TF_LOG is set to something other than a log level name.
     - To persist logged output you can set TF_LOG_PATH in order to force log to always be append  to specific file when logging is enabled.
 
-# Terraform Format
+## Terraform Format
 - Anyone whi is into programming knows the importance of formatting the code for readability.
 
 - The terraform fmt command is used to rewrite terraform files to take care of the overall formatting
@@ -655,18 +656,18 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - cli
     - terraform fmt
 
-# Terraform Validate
+## Terraform Validate
 - terraform validate primarily checks whether a configuration is syntactically valid.
 - it can check various aspects including unsupported arguments, undeclared variables and others.
 
     - terraform validate
 
-# Load Order & Semantics
+## Load Order & Semantics
 - Terraform generally load all the configuartion files within the directory specified in alphabetical order.
 
 - The files loaded must end in either .tf or .tf.json to specify the format that is in use.
 
-# Dynamic Blocks
+## Dynamic Blocks
 - In many of the use-cases there are repeatable nested blocks that needs to be defined.
 - This can lead to a long code and it can be difficult to manage in a longer time.
 
@@ -677,7 +678,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - The iterator argument sets the name of a temporary variable that represents the current element of the complex value.
     - If omitted, the name of the variable defaults to the label of the dynamic block.
 
-# Tainting Resources
+## Tainting Resources
 - you created a new resources via terraform
 - users have made a lot of manual changes.
 - Two ways to deal with it
@@ -693,7 +694,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     - Once a resource is marked as tainted the next plan will show that the resource will be destroyed and recreated.
     - NOTE: That the tainting a resource for recreation may affect resources that depends on the newly tainted resources. 
 
-# Splat Expression
+## Splat Expression
 - Splat Expression allows us to get a list of all attributes.
 - You can use in the output section to list all the attributes that are being created.
     - with the help of "*".
@@ -708,25 +709,25 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             value = aws_iam_user.lb[*].arn
         }
 
-# Terraform Graph
+## Terraform Graph
 - This allows us to generate a visual representation of either a configuration or execution plan.
 - The output of terraform graph is in the DOT format, which can easily be converted to an image.
     - terraform graph > graph.dot
     - download graphviz.gitlab.io
     - dot -Tpng InputFile.dot -o OutputFile.png (to convert in png)
 
-# Terraform Plan File
+## Terraform Plan File
 - the generated terraform plan can be saved to a specific path.
 - this plan can be used with terraform apply to be certain that only changes shown in this plan are applied.
     - Syntax
         - terraform plan -out=path
         - terraform apply "nameoffile"
 
-# Terraform Output
+## Terraform Output
 - terraform output command is used to extract the value of an output from the state file.
     - terraform output iam_name
 
-# Terraform Settings
+## Terraform Settings
 - The special terraform configuration block types is used to configured some behaviors of terraform itself, such as requiring version to apply your configuration.
 
     - Terraform Version
@@ -743,7 +744,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             }
         }
         
-# Dealing with larger Infrastructure
+## Dealing with larger Infrastructure
 - -refresh=false
 - -target=ec2
 - -auto-approve (no need to type "yes" again)
@@ -751,19 +752,19 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 - + => Add resource
 - - => Destroy resource
 
-# Zipmap Function
+## Zipmap Function
 - The zipmap function construct a map from a list of keys and a corresponding list of values.
 - syntax
     - cli
     - terraform console
     - zipmap([keys], [values])
 
-# Comments in terraform
+## Comments in terraform
 - //Comments
 - #single line comments
 - /*Comments*/
 
-# Data Type - SET
+## Data Type - SET
 - SET is used to stored multiple items in a single variable.
 - SET items are unordered and no duplicates allowed.
     - toset dunction
@@ -771,9 +772,11 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
             - toset(["a", "b", "c", "a"])
               > toset(["a", "b", "c"])
 
-# for_each (Meta-argument)
+## for_each (Meta-argument)
 - make use of map/set as an index value of the created resource.
     resource "aws_iam_user" "iam" {
         for_each = toset(["user-1", "user-2", "user-3"])
         name = each.key
     }
+
+# Terraform Provisioners
