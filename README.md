@@ -780,3 +780,91 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
     }
 
 # Terraform Provisioners
+
+## Understanding Provisioners in terraform
+- Till now, we were just creating, updating, and destroying the empty resources.
+
+- what if we want end to end solution?
+- where we have to create a EC2 instance and install a server over it via running a script?
+
+- Here comes the provisioners
+
+    resource "aws_instance" "myec2" {
+
+        ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
+        instance_type = "t2.micro"
+        key_name      = "keyname"
+
+        connection {
+            type        = "ssh"
+            user        = "ec2-user"
+            private_key = file("./keyname.pem")
+            host        = self.public_ip
+        }
+
+        provisioner "remote-exec" {
+            inline = [
+            "sudo amazon-linux-extras install -y nginx1",
+            "sudo systemctl start nginx"
+            ]
+        }
+    }
+
+- commands
+    - terraform init
+    - terraform plan
+    - terraform apply -auto-approve
+    - terraform destroy -auto-approve
+
+## Types of Provisioners
+- Terraform has capability to turn provisioners both at the same time of resources creation as well as destruction.
+
+- there are more types but mainly we are using two types of provisioners:
+    - local-exec
+        - Allow us to invoke executable after resources is created.
+    - remote-exec
+        - Allow us to invoke scripts Directly on the remote server.
+
+## remote-exec provisioners
+- Manual Way
+    - create a key-pair
+    - launch an ec2 with that key-pair
+    - store the key-pair
+    - CMD -> go the folder where you have store key-pair
+    - ssh -i keyname ec2-user@public_ip
+    - enter to connect 
+    - sudo su -
+    - yum -y install nginx
+    - sudo amazon-linux-extras install nginx1
+        - yes
+    - systemctl start nginx.service
+    - add a rule on port 80 in the security group
+        - access through public ip
+
+- via terraform
+    - copy the ami id as well
+    - if you are not adding the security group then the default security group will be applied, please add ssh and port 80 port to it.
+    -     resource "aws_instance" "myec2" {
+
+            ami           = "ami-01216e7612243e0ef" //If it is not working change the region and then try
+            instance_type = "t2.micro"
+            key_name      = "keyname"
+
+            connection {
+                type        = "ssh"
+                user        = "ec2-user"
+                private_key = file("./keyname.pem")
+                host        = self.public_ip
+            }
+
+            provisioner "remote-exec" {
+                inline = [
+                "sudo amazon-linux-extras install -y nginx1",
+                "sudo systemctl start nginx"
+                ]
+            }
+        }
+
+    - terraform plan
+    - terraform apply -auto-approve
+    - check via ssh and via public_ip
