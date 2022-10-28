@@ -217,7 +217,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
             - last update
 
-# Deploying Infrastructure with terraform
+# Section-3 :Deploying Infrastructure with terraform
 ## Providers and Resources
 - Providers
     - Terraform Supports Multiple Providers
@@ -383,7 +383,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
 
         - https://docs.google.com/document/d/179clqsxOGQa-iGKu1dcmz89Vpso9-7Of8opIkXwPr_k/edit?usp=sharing
 
-# Read, Generate, Modify Configuration
+# Section-4 :Read, Generate, Modify Configuration
 - Overview of the Format
     - We tend to use a different folder for each that we do in the course.
     - This allows us to be more systematic and allows easier revisit in-case required.
@@ -779,7 +779,7 @@ Docs- https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs
         name = each.key
     }
 
-# Terraform Provisioners
+# Section-5 :Terraform Provisioners
 
 ## Understanding Provisioners in terraform
 - Till now, we were just creating, updating, and destroying the empty resources.
@@ -903,3 +903,106 @@ resource "aws_instance" "myec2" {
 
 ## Null Response
 - https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource
+
+# Section-6 : Terraform Modules & Workspaces
+
+## Understanding DRY Principle
+- In software engineering, don't repeat yourself (DRY) is a principle of software development
+aimed at reducing repetition of software patterns.
+- In the earlier lecture, we were making static content into variables so that there can be a single
+source of information.
+- We do repeat multiple times various terraform resources for multiple projects.
+    - Example
+        - we were creating multiple Ec2 resource
+
+- Centralized Structure
+    - We can centralize the terraform resources and can call out from TF files whenever required.
+
+## Implementing EC2 module with Terraform
+- just create two folders
+    - modules (create according to your requirement)
+        - ec2
+            resource "aws_instance" "myec2" {
+                ami           = "ami-0e6329e222e662a52" //If it is not working change the region and then try
+                instance_type = "t2.micro"
+            }
+        - cloudformation
+    - projects
+        - A
+            - ec2.tf 
+                module "ec2module" {
+                   source = "../../modules/ec2"  
+                }
+
+- by doing this whenever you need to create the ec2 instance now you can call with module to create it.
+- terraform init
+- terraform plan
+## Variables & Terraform Modules
+- Challenges with modules
+    - One common need for infrastructure management is to build environments like staging, production with a similar setup but keeping environment variables different.
+
+    - When we use modules directly, the resources will be a replica of code in the module.
+
+    - If you have hard coded the resources then you will not be able to change it from the root module.
+
+    - Solution
+        - it is better to create variable for this
+
+            variable "instance_type" {
+                default =  "t2.micro" 
+            }
+
+        - Now if you add the instance_type in root module folder you will be able to override the default value.
+
+            module "ec2module" {
+                source = "../../modules/ec2"
+                instance_type = "t2.large"
+            }
+
+## Using Locals with Modules
+- Understanding the Challenge
+    - Using variables in Modules can also allow users to override the values which you might not want.
+
+-  Setting the Context
+    - There can be many repetitive values in modules and this can make your code difficult to maintain.
+    - You can centralize these using variables but users will be able to override it.
+
+- NOTE: if you don't want users to override it, then you better use Locals.
+
+    - locals
+        - Instead of variables, you can make use of locals to assign the values.
+        - You can centralize these using variables but users will be able to override it.
+
+        locals {
+            app_port = 8443
+        }
+
+- More details-> look into project -B
+
+## Module Outputs
+- Output values make information about your infrastructure available on the command line, and can expose information for other Terraform configurations to use.
+- Accessing child module output
+    - Adding the resource id to other resource
+    - like creating an EC2 instance and assigning the security group id to it via Outputs
+    - you need to provide the output in the resources creation file.
+
+## Terraform Registry
+- The Terraform Registry is a repository of modules written by the Terraform community.
+- The registry can help you get started with Terraform more quickly
+- Module Location
+    - If we intend to use a module, we need to define the path where the module files are present.
+    - The module files can be stored in multiple locations, some of these include:
+        ● Local Path
+        ● GitHub
+        ● Terraform Registry
+        ● S3 Bucket
+        ● HTTP URLs
+
+- Verified Modules in Terraform Registry
+    - Within Terraform Registry, you can find verified modules that are maintained by various third-party vendors.
+    - These modules are available for various resources like AWS VPC, RDS, ELB, and others
+
+    - Verified modules are reviewed by HashiCorp and actively maintained by contributors to stay up-to-date and compatible with both Terraform and their respective providers.
+    - The blue verification badge appears next to modules that are verified.
+    - Module verification is currently a manual process restricted to a small group of trusted HashiCorp partners.
+

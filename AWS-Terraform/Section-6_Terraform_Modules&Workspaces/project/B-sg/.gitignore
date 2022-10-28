@@ -1,0 +1,6 @@
+
+.terraform
+.terraform.lock.hcl
+key.tf
+nayan-terraform-key.pem
+private_ips.txt
