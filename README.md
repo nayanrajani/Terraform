@@ -1192,3 +1192,16 @@ Some of the popular backends include:
             - terraform destroy -auto-approve
         - security folder
             - terraform destroy -auto-approve
+
+## Terraform Import
+- It might happen that there is a resource that is already created manually.
+- In such a case, any change you want to make to that resource must be done manually
+
+- Terraform is able to import existing infrastructure. This allows you to take resources you've created by some other means and bring it under Terraform management.
+- The current implementation of Terraform import can only import resources into the state. It does not generate configuration. A future version of Terraform will also generate configuration.
+- Because of this, prior to running terraform import it is necessary to write manually a resource configuration block for the resource, to which the imported object will be mapped.
+
+    - Important Pointer
+        - The current implementation of terraform import can only import resources into the state. it does not generate configuration.
+        - A future version of terraform will also generate configuration.
+        - Because of this, prior to running terraform import it is necessary to write manually a resource configuration block for the resources, to which the imported object will be mapped.
