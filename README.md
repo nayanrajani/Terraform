@@ -1134,3 +1134,61 @@ Some of the popular backends include:
         - you will get an error "Error: Error acquiring the state lock"
     - check the dynamodb as well.
 - delete the table as well.
+
+## Terraform State Management
+- As your Terraform usage becomes more advanced, there are some cases where you may need to modify the Terraform state.
+- It is important to never modify the state file directly. Instead, make use of terraform state command.
+- There are multiple sub-commands that can be used with terraform state, these include:
+    - list
+        - The terraform state list command is used to list resources within a Terraform state.
+
+    - mv
+        - The terraform state mv command is used to move items in a Terraform state.
+        - This command is used in many cases in which you want to rename an existing resource without destroying and recreating it.
+        - Due to the destructive nature of this command, this command will output a backup copy of the state prior to saving any changes 
+        - Overall Syntax:
+            - terraform state mv [options] SOURCE DESTINATIO
+    - pull
+        - The terraform state pull command is used to manually download and output the state from a remote state.
+        - This is useful for reading values out of state (potentially pairing this command with something like jq).
+    - push
+        - The terraform state push command is used to manually upload a local state file to remote state.
+    - rm
+        - The terraform state rm command is used to remove items from the Terraform state.
+        - Items removed from the Terraform state are not physically destroyed. 
+        - Items removed from the Terraform state are only no longer managed by Terraform 
+        - For example, if you remove an AWS instance from the state, the AWS instance will continue running, but terraform plan will no longer see that instance.
+
+    - show
+        - The terraform state show command is used to show the attributes of a single resource in the Terraform state.
+
+## Connecting the Remote states
+- The terraform_remote_state data source retrieves the root module output values from some other Terraform configuration, using the latest state snapshot from the remote backend
+
+- Practical
+    - go to the network folder
+        - terraform init
+        - terraform apply -auto-approve
+        - go to aws and cross-check
+            - all the things are done
+    - now go to security folder
+        - and create sg.tf for creating the security group
+        - create a file remotestate.tf
+        - terraform init
+        - terraform apply -auto-approve
+        - go to aws and cross-check
+            - all the things are done
+
+    - If the ip is changed for that practical
+        - network folder
+            - terraform destroy -auto-approve
+            - terraform apply -auto-approve
+            - open the state file
+        - security folder
+            - terraform apply -auto-approve
+
+    - Completion
+        - network folder
+            - terraform destroy -auto-approve
+        - security folder
+            - terraform destroy -auto-approve
