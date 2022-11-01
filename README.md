@@ -1006,3 +1006,96 @@ source of information.
     - The blue verification badge appears next to modules that are verified.
     - Module verification is currently a manual process restricted to a small group of trusted HashiCorp partners.
 
+# Section-7: Remote State Management
+
+## Integrating with GIT for team management
+- download git for windows
+- create an account on Bit-bucket/Github
+- crete a repo and clone it in your directory
+- add files into that repo and commit and push the changes.
+
+- Little Warning:
+    - While committing data to the Git repository,  please avoid pushing your access/secret keys with the code. This is very important.
+
+## Security Challenges in committing TFState to GIT
+- Even if you create a different file for function, TFSTATE file will be storing the passwords
+- be careful when pushing to the repo.
+- will be discussing more in section 8
+
+## Module Sources in Terraform.
+- The source argument in a module block tells Terraform here to find the source code for the desired child module.
+    ● Local paths
+        - A local path must begin with either ./ or ../ to indicate that a local path is intended.
+    - Git Module
+        - Arbitrary Git repositories can be used by refixing the address with the special git:: prefix.
+        - After this prefix, any valid Git URL can be specified to select one of the protocols supported by Git.
+        - Referencing to a branch
+            - By default, Terraform will clone and use the default branch (referenced by HEAD) in the selected repository.
+
+            - You can override this using the ref argument:
+
+                module "demo" {
+                    source = "git::https://github.com/xyz/xyz.git?ref=development"
+                }
+
+            - The value of the ref argument can be any reference that would be accepted by the git checkout command, including branch and tag names
+
+    ● Terraform Registry
+    ● GitHub
+    ● Bitbucket
+    ● Generic Git, Mercurial repositories
+    ● HTTP URLs
+    ● S3 buckets
+    ● GCS buckets
+
+## Terraform and GitIgnore
+- The .gitignore file is a text file that tells Git which files or folders to ignore in a project.
+- Depending on the environment, it is recommended to avoid committing certain files to GIT.
+    - .terraform
+    - terraform.tfvars
+    - terraform.tfstate
+    - crash.log
+
+## Terraform Backend
+- Backends primarily determine where Terraform stores its state.
+- By default, Terraform implicitly uses a backend called local to store state as a local file on disk.
+
+- Challenges
+    - Nowadays Terraform projects are handled and collaborated by an entire team.
+    - Storing the state file in the local laptop will not allow collaboration
+
+- Ideal Architecture
+    - Following describes one of the recommended architectures:
+        - The Terraform Code is stored in Git Repository.
+        - The State file is stored in a Central backend.
+    
+- Terraform supports multiple backends that allow remote service related operations.
+Some of the popular backends include:
+    ● S3
+    ● Consul
+    ● Azurerm
+    ● Kubernetes
+    ● HTTP
+    ● ETCD
+
+-  Important Note
+    - Accessing state in a remote service generally requires some kind of access credentials.
+
+    - Some backends act like plain "remote disks" for state files; others support locking the state while     operations are being performed, which helps prevent conflicts and inconsistencies.
+
+## Implementing S3 backends
+- go for documentation
+- create a bucket in AWS
+- add a sub-folder for security and network and many more.
+- then go the s3backend folder add required files and specify the names and all
+- then download AWS CLI, and open cmd 
+- aws configure
+- then add you keys, default zone and enter
+    - then type this command to check you are able to see the sub-folders you have created.
+        - aws s3 ls s3://{bucket-name}
+- then in cmd got the s3 backend folder
+- terraform init
+- terraform apply -auto-approve
+- then go to the AWS Console and check the terraform.tf state file.
+
+## State locking file
