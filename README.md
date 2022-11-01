@@ -1098,4 +1098,39 @@ Some of the popular backends include:
 - terraform apply -auto-approve
 - then go to the AWS Console and check the terraform.tf state file.
 
-## State locking file
+## State locking 
+- Whenever you are performing write operation, terraform would lock the state file.
+- This is very important as otherwise during your ongoing terraform apply operations, if others also try for the same, it can corrupt your state file.
+
+- Important Note
+    - State locking happens automatically on all operations that could write state. You won't see any message that it is happening
+    - If state locking fails, Terraform will not continue Not all backends support locking. The documentation for each backend includes details on whether it supports locking or not.
+
+- Force Unlocking State
+    - Terraform has a force-unlock command to manually unlock the state if unlocking failed.
+    - If you unlock the state when someone else is holding the lock it could cause multiple writers.
+    - Force unlock should only be used to unlock your own lock in the situation where automatic unlocking failed.
+
+## State locking in S3 backend
+- By default, S3 does not support State Locking functionality.
+- You need to make use of the DynamoDB table to achieve state locking functionality.
+
+- steps:
+    - create a backend file and add a resource for 200 seconds sleep.
+    - add provider of aws.
+    - terraform init
+    - then create a dynamodb table with with any name and add the partitionkey as: LockID with string.
+    -  copy the name and add into the backend code.
+    - change the key from tmp to demo.tf
+    - terraform init
+        - if you get error 
+            - then 
+                - terraform init -reconfigure
+
+    - terraform apply -auto-approve
+    - open another cmd fast
+    - got to the same directory
+    - terraform plan
+        - you will get an error "Error: Error acquiring the state lock"
+    - check the dynamodb as well.
+- delete the table as well.
