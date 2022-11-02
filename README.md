@@ -1290,3 +1290,20 @@ Terraform Cloud
 
 - Important Note:
     - Interacting with Vault from Terraform causes any secrets that you read and write to be persisted in Terraform's state file
+
+# Section-9: Terraform Cloud & Enterprise Capabilities
+
+## Overview of terraform cloud
+- Terraform Cloud manages Terraform runs in a consistent and reliable environment with various features like access controls, private registry for sharing modules,  policy controls, and others.
+
+- Terraform Cloud is available as a hosted service at https://app.terraform.io.
+
+- Create a terraform cloud Account for free
+
+## Creating infra with terraform cloud
+- create a repo
+- add code
+- add a workspace in terraform cloud
+- add the repo in terraform cloud
+- set variable
+- and the test and run
