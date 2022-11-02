@@ -1260,5 +1260,33 @@ same provider name, but set the alias meta-argument to an alias name to use for 
 
 - We have kept this specific video available in the course on behalf of multiple requests by students from AWS background who needed to understand integration of Terraform with AWS STS.
 
-## Terraform & Assume Role with AWS STS
-- 
+## Sensitive parameter
+- With the organization managing its entire infrastructure in terraform, it is likely that you will see some sensitive information embedded in the code.
+- When working with a field that contains information likely to be considered sensitive, it is best to
+set the Sensitive property on its schema to true
+
+- Setting the sensitive to “true” will prevent the field's values from showing up in CLI output and in
+Terraform Cloud 
+- It will not encrypt or obscure the value in the state, however.
+
+## Note - HashiCorp Vault
+- The below video of "Overview of HashiCorp Vault" is taken from our HashiCorp Certified Vault Associate 2022 video course.
+
+- Since in the Terraform exams, you can expect a question about Vault Integration, we have decided to add a overview of Vault video in this course.
+
+- Once you understand the basics of what Vault is, we will then discuss about it's integration with Terraform.
+
+## HashiCorp Vault
+- HashiCorp Vault allows organizations to securely store secrets like tokens, passwords, certificates along with access management for protecting secrets.
+- One of the common challenges nowadays in an organization is “Secrets Management”
+- Secrets can include database passwords, AWS access/secret keys, API Tokens, encryption keys and others Vault can also generate dynamic secrets like AWS Access/Secret keys that has validity for a limited time
+- Dynamic Secrets
+    - Once Vault is integrated with multiple backends, your life will become much easier and you can focus more on the right work.
+    - Major aspects related to Access Management can be taken over by vault.
+
+## Terraform & Vault Integration
+- Vault Provider
+    - The Vault provider allows Terraform to read from, write to, and configure HashiCorp Vault.
+
+- Important Note:
+    - Interacting with Vault from Terraform causes any secrets that you read and write to be persisted in Terraform's state file
