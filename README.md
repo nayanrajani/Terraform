@@ -1205,3 +1205,60 @@ Some of the popular backends include:
         - The current implementation of terraform import can only import resources into the state. it does not generate configuration.
         - A future version of terraform will also generate configuration.
         - Because of this, prior to running terraform import it is necessary to write manually a resource configuration block for the resources, to which the imported object will be mapped.
+
+# Security Primer
+
+## Handling Access & Secret Key  
+- So if you have configured the AWS CLI then you don't have to write Access and secret keys in file and resources.
+
+- please try avoiding the use of Access and secret key in same file or folder better use of variable and tfvars.
+and use .gitignore to not send the key files publicly
+
+## Terraform Provider Usecase - Resources in Multiple Regions
+
+- Provider Configuration
+    - Till now, we have been hardcoding the aws-region parameter within the providers.tf
+    - This means that resources would be created in the region specified in the providers.tf file.
+    - By default, resources use a default provider configuration inferred from the first word of the resource type name.
+    - For example, a resource of type aws_instance uses the default (un-aliased) aws provider configuration unless otherwise stated. 
+    - To select an aliased provider for a resource or data source, set its provider meta-argument to a <PROVIDER NAME>.<ALIAS> reference
+
+    - For multiple region
+        - alias  = "Singapore" in provider Block
+        - provider = aws.Singapore in resource Block
+        - terraform init
+        - terraform apply -auto-approve
+
+- For Multiple Accounts 
+## Handling Multiple AWS Profiles with Terraform Provider
+- You can optionally define multiple configurations for the same provider, and select which one to use on a per-resource or per-module basis.
+- The primary reason for this is to support multiple regions for a cloud platform.
+- To include multiple configurations for a given provider, include multiple provider blocks with the
+same provider name, but set the alias meta-argument to an alias name to use for each additional configuration. 
+
+- Profiles
+    - just go to your .aws folder in C drive and check for credentials file.
+    - add one more for [account02] after default
+    - to reference this 
+        - add in provider 
+            - profile = "account02"
+
+            provider "aws" {
+                alias   = "account02"
+                region  = "ap-southeast-1" 
+                profile = "account02"
+            }
+
+    - terraform init
+    - terraform apply -auto-approve
+
+
+## Note - STS
+- The below video named "Terraform & Assume Role with AWS STS" is beyond the scope of official Terraform exams.
+
+- If you are not familiar with AWS in-detail, you can skip the next video.
+
+- We have kept this specific video available in the course on behalf of multiple requests by students from AWS background who needed to understand integration of Terraform with AWS STS.
+
+## Terraform & Assume Role with AWS STS
+- 
