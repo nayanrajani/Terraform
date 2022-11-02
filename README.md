@@ -1301,9 +1301,32 @@ Terraform Cloud
 - Create a terraform cloud Account for free
 
 ## Creating infra with terraform cloud
-- create a repo
-- add code
-- add a workspace in terraform cloud
-- add the repo in terraform cloud
+- create a repo in github private
+- add code below in ec2.tf 
+    provider "aws" {
+        region     = "ap-south-1"
+    }
+
+    resource "aws_instance" "myec2" {
+        ami = "ami-01216e7612243e0ef"
+        instance_type = "t2.micro"
+    }
+
+- add a workspace in terraform cloud connect with github with that repo
+
 - set variable
-- and the test and run
+    - add access key and secret key as a environment variable
+        - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+- then got to action
+    - plan and apply
+        - start run
+    - it will show you the plan
+    - then confirm and apply to create the ec2 instance
+    - to destroy
+        - go to destruction & deletion
+            - queue destroy plan and delete
+
+## Overview of Sentinel
+- Sentinel is an embedded policy-as-code framework integrated with the HashiCorp Enterprise products.
+- It enables fine-grained, logic-based policy decisions, and can be extended to use information from external sources.
+- Note: Sentinel policies are paid feature
