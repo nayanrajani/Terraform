@@ -1312,7 +1312,7 @@ Terraform Cloud
         instance_type = "t2.micro"
     }
 
-- add a workspace in terraform cloud connect with github with that repo
+- add a workspace with "Version Control" in terraform cloud connect with github with that repo
 
 - set variable
     - add access key and secret key as a environment variable
@@ -1330,3 +1330,58 @@ Terraform Cloud
 - Sentinel is an embedded policy-as-code framework integrated with the HashiCorp Enterprise products.
 - It enables fine-grained, logic-based policy decisions, and can be extended to use information from external sources.
 - Note: Sentinel policies are paid feature
+
+## Remote Backends
+- The remote backend stores terraform state and may be used to run operations in terraform cloud.
+- Terraform cloud can also be used with local operations, in which case only state is stored in the terraform cloud.
+
+- Terraform supports various types of remote backends which can be used to store state data.
+- As of now, we were storing state data in local and GIT repository.
+- Depending on remote backends that are being used, there can be various features.
+    ● Standard BackEnd Type: State Storage and Locking
+    ● Enhanced BackEnd Type: All features of Standard + Remote Management
+- When using full remote operations, operations like terraform plan or terraform apply can be executed in Terraform Cloud's run environment, with log output streaming to the local terminal.
+- Remote plans and applies use variable values from the associated Terraform Cloud workspace.
+- Terraform Cloud can also be used with local operations, in which case only state is stored in the Terraform Cloud backend.
+
+## Remote operation Implementation
+- create a new workspace of "CLI driven", then 
+- read CLI Driven Runs
+- copy the provided code and create a new file remote-backend.tf.
+
+    terraform {
+        cloud {
+            organization = "Organisation name"
+
+            workspaces {
+                name = "Remote-Operation"
+            }
+        }
+    }
+
+- create iam.tf file and add below code with provider and keys
+
+    provider "aws" {
+        region     = "us-west-2"
+        access_key = "YOUR-ACCESS-KEY"
+        secret_key = "YOUR-SECRET-KEY"
+    }
+
+    resource "aws_iam_user" "lb" {
+        name = "loadbalancer"
+        path = "/system/"
+    }   
+
+- Now we need to login via CLi into terraform cloud 
+    - go to folder in cmd
+    - terraform login
+        - If login is successful, Terraform will store the token in plain text in the following file for use by subsequent commands:
+            - C:\Users\{username}\AppData\Roaming\terraform.d\credentials.tfrc.json
+        - yes
+        - it will automatically open a web page and create a token and copy and paste in cmd
+    - terraform init
+    - terraform plan
+    - terraform apply -auto-approve
+    - terraform destroy -auto-approve
+
+## 
