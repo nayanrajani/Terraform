@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------------------
-# Share subnet with BEV_Dev Account
+# Share subnet with  Account
 resource "aws_ram_resource_share" "shared_dev_subnet_sharing" {
   name                      = "ram_shared_dev_subnet_sharing_mum_01"
   allow_external_principals = false
@@ -11,14 +11,6 @@ resource "aws_ram_resource_association" "shared_dev_subnet_assoc" {
   resource_share_arn = aws_ram_resource_share.shared_dev_subnet_sharing.arn
 }
 
-
-resource "aws_ram_principal_association" "shared_dev_principal" {
-  principal          = "295136033060"
-  resource_share_arn = aws_ram_resource_share.shared_dev_subnet_sharing.arn
-}
-
-#-----------------------------------------------------------------------------------------------------
-# Share subnet with other sharing Account
 
 resource "aws_ram_principal_association" "sharing_dev_principal" {
   count              = length(local.sharing_dev_account_list)
