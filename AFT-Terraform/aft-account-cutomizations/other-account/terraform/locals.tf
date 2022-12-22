@@ -33,6 +33,31 @@ locals {
   sharing_dev_account_list = ["<account-number>", "<account-number>"]
 
 
+  # vpc cidr for sg_comsrv_endpoint, which want to use vpc endpoints for session manager
+  shared_dev_vpc_cidr     = module.aft_accounts_info.param_name_values["${local.ssm_parameter_path}<Account-name>/vpc_cidr"]
+  shared_prd_vpc_cidr     = module.aft_accounts_info.param_name_values["${local.ssm_parameter_path}<Account-name>/vpc_cidr"]
+  shared_uat_vpc_cidr     = module.aft_accounts_info.param_name_values["${local.ssm_parameter_path}<Account-name>/vpc_cidr"]
+  network_vpc_cidr        = module.aft_accounts_info.param_name_values["${local.ssm_parameter_path}<Account-name>/vpc_cidr"]
+
+ # Shared-Route 53 Settings
+  private_r53_zone_name = "<zone-name>"
+  private_network_range = ["<private_network_cidr>", "<private_network_cidr>"]
+  onprem_private_network_range = [ "<private_onprem_cidr>", "<private_onprem_cidr>"]
+  account_list = ["<Account-name>", "<Account-name>", "<Account-name>"]
+
+  #----Account Number list contain shared and dev accounts number
+  account_number_list = ["<Account-no>","<Account-no>","<Account-no>", "<Account-no>","<Account-no>"] 
+  rslr_rule_name = "<rule-name>"
+  rslr_onprem_rule_name = "<onprem_rule_name>"
+
+  # DEV-Route 53 Settings
+  private_r53_zone_name_dev = "<zone-name>"
+  account_list_dev = ["<Account-name>", "<Account-name>"]
+
+  # ssm.ap-south-1.amazonaws.com Endpoint route 53 setting
+  private_r53_zone_ssm_endpoint = "<endpoint-service>"
+  account_list_endpoint = ["<Account-name>", "<Account-name>", "<Account-name>"]
+ 
   primary_igw_name           = "<public_igw-name>"
   public_nat_rt_name         = "<name>"
   private_tgw_rt_name        = "<name>"
