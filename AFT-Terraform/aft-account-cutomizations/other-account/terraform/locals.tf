@@ -18,7 +18,7 @@ locals {
   public_alb_rtb_name    = "<public_rt_list>"
 
 
-  network_account_id = module.aft_account_list.param_name_values["${local.ssm_parameter_path_account_list}account-lz2.0-network"]
+  network_account_id = module.aft_account_list.param_name_values["${local.ssm_parameter_path_account_list}<account-name>"]
   network_tgw_id     = data.aws_ec2_transit_gateway.primary_network_tgw.id
   shared_subnet_list = [
     "subnet-arn",
@@ -30,14 +30,15 @@ locals {
     "subnet-arn",
     "subnet-arn"
   ]
-  sharing_dev_account_list = ["024259687925", "196533851584"]
+  sharing_dev_account_list = ["<account-number>", "<account-number>"]
 
 
-  primary_igw_name           = "igw-shared-dev-mum-01"
-  public_nat_rt_name         = "rtb-shared-dev-publicnat-mum01"
-  private_tgw_rt_name        = "rtb-shared-dev-privatetgw-mum01"
-  private_fw_rt_name         = "rtb-shared-dev-privatefw-mum01"
-  tgw_attachment_name        = "tgw-shared-dev-tgwattach-mum-01"
+  primary_igw_name           = "<public_igw-name>"
+  public_nat_rt_name         = "<name>"
+  private_tgw_rt_name        = "<name>"
+  private_fw_rt_name         = "<name>"
+  tgw_attachment_name        = "<name>"
+
   appliance_mode_support     = "enable"
   tgw_default_rt_association = false
   tgw_default_rt_propagation = false
@@ -48,20 +49,7 @@ locals {
   assign_generated_ipv6_cidr_block = false
 
   common_tags = {
-    application-owner           = "mustansir burhanpurwala"
-    application-technical-Group = "CCOE"
-    requester-name              = "25001523@mahindra.com"
-    cost-center                 = "ratio"
-    business-unit               = "Corporate IT"
-    department                  = "CCOE"
-    created-by                  = "Bcone-60194@mahindra.com"
-    created-date                = "13-Dec-2022"
-    environment                 = "DEV"
-    business-project-name       = "Shared-Dev"
-    application-landscape       = "shared-dev"
-    shared-dedicate             = "Common Services"
-    application-criticality     = "MC"
-    compliance                  = "NA"
+    key           = "value"
   }
 
   ssm_parameter_path              = "/mm/aft/account_customization/output/"
