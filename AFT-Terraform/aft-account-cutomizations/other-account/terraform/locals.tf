@@ -1,50 +1,34 @@
 locals {
-  account_name       = "account-lz2.0-shared-dev"
-  primary_vpc_name   = "vpc-shared-dev-mum-001"
-  primary_region     = "ap-south-1"
+  account_name       = "<account-name>"
+  primary_vpc_name   = "<vpc-name>"
+  primary_region     = "<zone-name>"
   availability_zones = ["${local.primary_region}a", "${local.primary_region}b"]
 
   # Primary VPC CIDR
-  primary_vpc_cidr = "10.164.0.0/16"
+  primary_vpc_cidr = "<vpc_cidr>"
 
   # Private TGW subnet list, name and route table
-  private_tgw_subnet_list = ["10.164.0.0/28", "10.164.0.16/28"]
-  private_tgw_subnet_name = ["snt-shared-dev-tgwattach-mum-a01", "snt-shared-dev-tgwattach-mum-b01"]
-  private_tgw_rtb_name    = "rtb-shared-dev-tgwattach-mum-01"
+  private_tgw_subnet_list = ["<tgw-subnet-cidr>", "<tgw-subnet-cidr>"]
+  private_tgw_subnet_name = ["<tgw-subnet-name>", "<tgw-subnet-name>"]
+  private_tgw_rtb_name    = "<tgw-rt-name>"
 
   # Public subnet list, name and route table FOR ALB
-  public_alb_subnet_list = ["10.164.2.0/23", "10.164.4.0/23"]
-  public_alb_subnet_name = ["snt-shared-dev-alb-mum-a01", "snt-shared-dev-alb-mum-b01"]
-  public_alb_rtb_name    = "rtb-shared-dev-alb-mum-01"
-
-  # Private Subnet List, name and route table for WEB
-  private_subnet_list_web     = ["10.164.32.0/19", "10.164.64.0/19"]
-  private_subnet_name_web     = ["snt-shared-dev-web-mum-a01", "snt-shared-dev-web-mum-b01"]
-  private_subnet_rtb_name_web = "rtb-shared-dev-web-private-mum-01"
-
-  # Private Subnet List, name and route table for APP
-  private_subnet_list_app     = ["10.164.96.0/19", "10.164.128.0/19"]
-  private_subnet_name_app     = ["snt-shared-dev-app-mum-a01", "snt-shared-dev-app-mum-b01"]
-  private_subnet_rtb_name_app = "rtb-shared-dev-app-private-mum-01"
-
-
-  # Private Subnet List, name and route table for DB
-  private_subnet_list_db     = ["10.164.160.0/19", "10.164.192.0/19"]
-  private_subnet_name_db     = ["snt-shared-dev-db-mum-a01", "snt-shared-dev-db-mum-b01"]
-  private_subnet_rtb_name_db = "rtb-shared-dev-db-private-mum-01"
+  public_alb_subnet_list = ["<public_subnet_list>", "<public_subnet_list>"]
+  public_alb_subnet_name = ["<public_subnet_name>", "<public_subnet_name>"]
+  public_alb_rtb_name    = "<public_rt_list>"
 
 
   network_account_id = module.aft_account_list.param_name_values["${local.ssm_parameter_path_account_list}account-lz2.0-network"]
   network_tgw_id     = data.aws_ec2_transit_gateway.primary_network_tgw.id
   shared_subnet_list = [
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-042b0e68ab37ffb04",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-02f4ee2479ce58ab6",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-0d23cc67219c033cc",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-02b781ffa0fba2478",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-0c1da1ef75265b55c",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-0696dd9cfecac556c",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-01db556e29e4c825a",
-    "arn:aws:ec2:ap-south-1:679578531064:subnet/subnet-00657867cfc3f87c1"
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn",
+    "subnet-arn"
   ]
   sharing_dev_account_list = ["024259687925", "196533851584"]
 
