@@ -13,6 +13,9 @@ variable "az" {
 variable "timeout" {
   type = number
 }
+variable "istest" {
+  type = number
+}
 
 variable "elb_names" {
   type    = list(any)
